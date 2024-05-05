@@ -9,10 +9,7 @@ export const sleep = async () => {
 
 export const getPokemons = async (page: number, limit: number = 20): Promise<Pokemon[]> => {
 
-    await sleep();
-
-    console.log('Get pokemons');
-
+    // await sleep();
 
 
     try {
@@ -20,13 +17,13 @@ export const getPokemons = async (page: number, limit: number = 20): Promise<Pok
         const url = `/pokemon?offset=${page * 10}&limit=${limit}`;
         const { data } = await pokeApi.get<PokeApiPaginateResponse>(url);
 
-        const pokemonPromises = data.results.map((info) => {
+        const pokemonPromises = data.results.map(info => {
             return pokeApi.get<PokeAPIPokemon>(info.url);
         });
 
         const pokeApiPokemons = await Promise.all(pokemonPromises);
 
-        const pokemonsPromises = pokeApiPokemons.map((pokemon) => PokemonMapper.pokeApiPokemonToEntity(pokemon.data))
+        const pokemonsPromises = pokeApiPokemons.map(pokemon => PokemonMapper.pokeApiPokemonToEntity(pokemon.data))
 
 
         return await Promise.all(pokemonsPromises);
