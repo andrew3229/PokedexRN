@@ -18,6 +18,8 @@ export const HomeScreen = () => {
     });
 
 
+    
+
     return (
         <View style={globalTheme.globalMargin}>
             <PokemonBg style={styles.imgPosition} />
