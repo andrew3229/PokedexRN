@@ -47,7 +47,6 @@ export const HomeScreen = () => {
                 onEndReached={() => fetchNextPage()}
             />
 
-
         </View>
     )
 }
